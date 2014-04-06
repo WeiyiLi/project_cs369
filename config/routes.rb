@@ -1,7 +1,15 @@
 ProjectCs369::Application.routes.draw do
-  get "users/new"
-  get "static_pages/home"
-  # The priority is based upon order of creation: first created -> highest priority.
+
+  resources :users
+  root  'static_pages#home'
+  match '/signup',  to: 'users#new',            via: 'get'
+
+
+
+
+
+
+ # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
