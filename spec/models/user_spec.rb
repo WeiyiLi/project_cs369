@@ -17,6 +17,11 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:watchlists) }
+  it { should respond_to(:followed_series) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -110,9 +115,26 @@ describe User do
     end
   end
 
-
-describe "remember token" do
+  describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "add to watchlist" do
+    let(:series) { FactoryGirl.create(:series) }
+    before do
+      @user.save
+      @user.follow!(series)
+    end
+
+    it { should be_following(series) }
+    its(:followed_series) { should include(series) }
+
+    describe "and removing from watchlist" do
+      before { @user.unfollow!(series) }
+
+      it { should_not be_following(series) }
+      its(:followed_series) { should_not include(series) }
+    end
   end
 end

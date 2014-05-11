@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
   has_many :comments, dependent: :destroy
+  has_many :watchlists, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_series, through: :watchlists, source: :series
 
 
   def feed
@@ -21,6 +23,18 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def following?(series)
+    watchlists.find_by(series_id: series.id)
+  end
+
+  def follow!(series)
+    watchlists.create!(series_id: series.id)
+  end
+
+  def unfollow!(series)
+    watchlists.find_by(series_id: series.id).destroy
   end
 
   private

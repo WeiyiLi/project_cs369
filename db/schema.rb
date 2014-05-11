@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506030823) do
+ActiveRecord::Schema.define(version: 20140511184711) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20140506030823) do
   end
 
   add_index "comments", ["user_id", "created_at"], name: "index_comments_on_user_id_and_created_at"
+
+  create_table "series", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "series", ["name"], name: "index_series_on_name", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -34,5 +42,16 @@ ActiveRecord::Schema.define(version: 20140506030823) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "watchlists", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "series_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watchlists", ["follower_id", "series_id"], name: "index_watchlists_on_follower_id_and_series_id", unique: true
+  add_index "watchlists", ["follower_id"], name: "index_watchlists_on_follower_id"
+  add_index "watchlists", ["series_id"], name: "index_watchlists_on_series_id"
 
 end

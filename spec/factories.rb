@@ -9,4 +9,8 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :series do
+  	name "Series X"
+  end
 end
