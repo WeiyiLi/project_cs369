@@ -1,0 +1,13 @@
+<div class="stats">
+	<% if @series.followers.count > 1 %>
+    <strong id="followers" class="stat">
+    	<%= @series.followers.count %>
+    </strong> 
+    people are watching this series
+  <% else %>
+    <strong id="followers" class="stat">
+    	<%= @series.followers.count %>
+    </strong> 
+  	person is watching this series
+  <% end %>
+</div>

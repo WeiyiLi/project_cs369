@@ -1,0 +1,4 @@
+<%= form_for(current_user.watchlists.build(series_id: @series.id)) do |f| %>
+  <div><%= f.hidden_field :series_id %></div>
+  <%= f.submit "Follow", class: "btn btn-large btn-primary" %>
+<% end %>
