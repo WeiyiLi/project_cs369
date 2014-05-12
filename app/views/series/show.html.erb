@@ -1,3 +1,4 @@
+<% provide(:title, @series.name) %>
 <%= @series.name %>
 <%= render 'follow_form' if logged_in? %>
 <section>

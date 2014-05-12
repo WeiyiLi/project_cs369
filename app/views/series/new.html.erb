@@ -1,0 +1,25 @@
+<% if logged_in? %>
+	<% if current_user.admin? %>
+		<% provide(:title, 'New series') %>
+		<h1>New series</h1>
+
+		<div class="row">
+		  <div class="span6 offset3">
+		   <%= form_for(@series) do |f| %>
+		      <%= f.label :name %>
+		      <%= f.text_field :name %>
+
+		      <%= f.submit "Create this series", class: "btn btn-large btn-primary" %>
+		    <% end %>
+		  </div>
+		</div>
+	<% else %>
+	  <div class="alert alert-error">
+	    <h2>Authorization is required.</h2>
+	  </div>
+	<% end %>
+<% else %>
+  <div class="alert alert-error">
+    <h2>Authorization is required.</h2>
+  </div>
+<% end %>

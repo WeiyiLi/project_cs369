@@ -7,7 +7,7 @@ ProjectCs369::Application.routes.draw do
   end
   resources :watchlists, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :series, only: [:show] do
+  resources :series do
     member do
       get :followers
     end

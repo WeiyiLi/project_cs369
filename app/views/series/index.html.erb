@@ -1,0 +1,9 @@
+<% provide(:title, 'Search series') %>
+<h1>All series</h1>
+<ul class="center">
+  <%= will_paginate %>
+  <ul class="series">
+    <%= render @series %>
+  </ul>
+  <%= will_paginate %>
+<ul class="center">
