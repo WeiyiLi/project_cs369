@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:watchlist, :edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
   def watchlist
-    @watchlists = @user.watchlists
+    @user = User.find(params[:id])
+    @watchlists = Watchlist.where(follower_id: @user.id).select("series_id")
+    @series = Series.where(id: @watchlists)
   end
 
   def index

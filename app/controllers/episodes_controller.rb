@@ -9,6 +9,8 @@ class EpisodesController < ApplicationController
 
   def show
      @episode = Episode.find(params[:id])
+     @comment = @episode.comments.build(params[:comment_params])
+     @comment_items = @episode.comments.paginate(page: params[:page])
   end
 
   def create
@@ -27,5 +29,9 @@ class EpisodesController < ApplicationController
     def episode_params
       params.require(:episode).permit(:name, :season, :number,
                                    :series_id)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:content, :user_id, :episode_id)
     end
 end

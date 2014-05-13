@@ -7,6 +7,7 @@ ProjectCs369::Application.routes.draw do
   end
   resources :watchlists, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :comments, only: [:new, :create, :destroy]
   resources :episodes
   resources :series do
     member do

@@ -27,7 +27,19 @@ end
 def make_series
   10.times do |n|
     name  = "series#{n+1}"
+    numberName = 0
     Series.create!(name: name)
+      (rand(3)+1).times do |m|
+      season = m+1
+      (rand(10)+10).times do |k|
+        number = k+1
+        numberName = numberName + 1
+        Episode.create!(name: "Episode#{numberName}",
+                      season: season,
+                      number: number,
+                      series_id: n)
+      end
+    end
   end
 end
 

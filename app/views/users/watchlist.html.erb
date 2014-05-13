@@ -1,0 +1,9 @@
+<% provide(:title, @user.name + " Watchlist") %>
+<h1>Watchlist</h1>
+<center>
+  <% if @series.any? %>
+    <ol class="comments">
+      <%= render partial: 'series/series', collection: @series %>
+    </ol>
+  <% end %>
+</center>
