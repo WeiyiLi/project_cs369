@@ -12,8 +12,6 @@ describe Comment do
   it { should respond_to(:user) }
   its(:user) { should eq user }
 
-  it { should be_valid }
-
   describe "when user_id is not present" do
     before { @comment.user_id = nil }
     it { should_not be_valid }

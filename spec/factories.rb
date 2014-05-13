@@ -11,6 +11,13 @@ FactoryGirl.define do
   end
 
   factory :series do
-  	name "Series X"
+    name "Series X"
+  end
+
+  factory :episode do
+    name "Episode X"
+    season 1
+    number 1
+    series_id 1
   end
 end
