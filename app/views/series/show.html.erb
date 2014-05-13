@@ -1,6 +1,20 @@
 <% provide(:title, @series.name) %>
+<% if current_user.admin? %>
+  <h2>
+    <%= link_to "Add a Episode", new_episode_path %>
+  </h2>
+<% end %>
 <%= @series.name %>
 <%= render 'follow_form' if logged_in? %>
 <section>
-  <%= render 'stats_series' %>
-</section>	
+  <%= render 'stats_series' %>.
+</section>
+
+
+<h1>Episodes</h1>
+<ul class="center">
+  <% @episodes.each do |episode| %>
+    S<%= episode.season %>E<%= episode.number %> - <%= link_to episode.name, episode_path(episode) %>
+    <br>
+  <% end %>
+</ul>

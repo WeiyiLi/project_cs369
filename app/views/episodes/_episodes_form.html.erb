@@ -1,0 +1,13 @@
+<%= form_for(@episode) do |f| %>
+  <div class="field">
+  	<%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.submit "Add Episode", class: "btn btn-large btn-primary" %>
+<% end %>
+
+
+<div class="field">
+  <%= f.label :author_id %><br>
+  <%= f.collection_select :author_id, Author.order(:name), :id, :name, include_blank: false %>
+</div>

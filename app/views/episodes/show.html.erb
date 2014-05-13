@@ -1,0 +1,5 @@
+<div>
+	<h1><%= @episode.name %></h1>
+	<h2>Season <%= @episode.season %> - Episode <%= @episode.number %> (S<%= @episode.season %>E<%= @episode.number %>)<br>
+	<%= link_to Series.find(@episode.series_id).name, series_path(@episode.series_id) %></h2><br>
+</div>

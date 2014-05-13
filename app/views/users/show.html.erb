@@ -6,6 +6,17 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <br>
+      <%= @user.watchlists.count %> Series on Watchlist
     </section>
   </aside>
+  <div class="span8">
+    <h3>Comments (<%= @user.comments.count %>)</h3>
+    <% if @user.comments.any? %>
+      <ol class="comments">
+        <%= render @comments %>
+      </ol>
+      <%= will_paginate @comments %>
+    <% end %>
+  </div>
 </div>

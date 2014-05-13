@@ -6,10 +6,11 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find(params[:id])
+    @episodes = @series.episodes.order(season: :desc, number: :desc)
   end
 
   def new
-     @series = Series.new
+    @series = Series.new
   end
 
   def create

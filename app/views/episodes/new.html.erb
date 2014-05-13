@@ -1,0 +1,46 @@
+<% if logged_in? %>
+  <% if current_user.admin? %>
+    <% provide(:title, 'Add episode to a series') %>
+    <h1>New episode</h1>
+
+    <div class="row">
+      <div class="span6 offset3">
+        <%= form_for(@episode) do |f| %>
+          <% if @episode.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being created:</h2>
+
+              <ul>
+              <% @episode.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= f.label :series_id %><br>
+          <%= f.collection_select :series_id, Series.order(:name), :id, :name, include_blank: false %>
+
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+
+          <%= f.label :season %>
+          <%= f.text_field :season %>
+
+          <%= f.label :number %>
+          <%= f.text_field :number %>
+
+          <%= f.submit "Add this episode", class: "btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-error">
+      <h2>Authorization is required.</h2>
+    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-error">
+    <h2>Authorization is required.</h2>
+  </div>
+<% end %>

@@ -11,16 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511184711) do
+ActiveRecord::Schema.define(version: 20140513000608) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "episode_id"
   end
 
+  add_index "comments", ["episode_id", "created_at"], name: "index_comments_on_episode_id_and_created_at"
   add_index "comments", ["user_id", "created_at"], name: "index_comments_on_user_id_and_created_at"
+
+  create_table "episodes", force: true do |t|
+    t.integer  "series_id"
+    t.integer  "season"
+    t.integer  "number"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "episodes", ["series_id", "season", "number"], name: "index_episodes_on_series_id_and_season_and_number"
 
   create_table "series", force: true do |t|
     t.string   "name"
